@@ -1,7 +1,5 @@
 global.Barista = require('../../vendor/barista.js');
 
-require('../../backboneApp.js');
+var App = require('../../backboneApp.js');
 
-Barista.TaskModel = Barista.Model.extend({
-  //
-});
+Barista.config(App);
