@@ -20,7 +20,14 @@ describe('Barista', function() {
         var newModel = new Barista.Model();
         expect(newModel.isA('Barista.Model')).toBe(true);
       });
+
+      it('returns false with another argument', function() {
+        var newModel = new Barista.Model();
+        expect(newModel.isA('Porsche')).toBe(false);
+      });
     });
+
+    describe('isA')
   });
 
   describe('config', function() {
@@ -28,6 +35,8 @@ describe('Barista', function() {
     // The config method takes an app object as input and extends Barista.Model
     // and Barista.Collection using the models and collections defined on the 
     // app object.
+
+    // This example is taken from the spec/ex1 directory.
 
     it('creates a Barista.TaskModel object', function() {
       //
