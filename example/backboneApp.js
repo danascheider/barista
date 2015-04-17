@@ -4,7 +4,7 @@ var Backbone = require('backbone'),
 global.App   = {};
 
 App.Task   = Backbone.Model.extend({
-  url      : 'http://localhost:9292/tasks/' + this.get('id')
+  url      : 'http://localhost:9292/tasks/' + this.get('id'),
   defaults : {
     title: 'Untitled Task 1',
     done : false
