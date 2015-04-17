@@ -1,6 +1,7 @@
 var gulp       = require('gulp'),
     browserify = require('browserify'),
     source     = require('vinyl-source-stream'),
+    sourcemaps = require('gulp-sourcemaps'),
     buffer     = require('vinyl-buffer'),
     uglify     = require('gulp-uglify'),
     reactify   = require('reactify'),
