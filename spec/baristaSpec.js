@@ -23,11 +23,28 @@ describe('Barista', function() {
 
       it('returns false with another argument', function() {
         var newModel = new Barista.Model();
-        expect(newModel.isA('Porsche')).toBe(false);
+        expect(newModel.isA('Barista.Collection')).toBe(false);
       });
     });
+  });
 
-    describe('isA')
+  describe('Barista.Collection', function() {
+    describe('isA', function() {
+      it('returns true with arg \'Backbone.Collection\'', function() {
+        var newCollection = new Barista.Collection();
+        expect(newCollection.isA('Backbone.Collection')).toBe(true);
+      });
+
+      it('returns true with arg \'Barista.Collection\'', function() {
+        var newCollection = new Barista.Collection();
+        expect(newCollection.isA('Barista.Collection')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        var newCollection = new Barista.Collection();
+        expect(newCollection.isA('Porsche')).toBe(false);
+      });
+    });
   });
 
   describe('config', function() {
