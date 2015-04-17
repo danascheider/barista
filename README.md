@@ -1,4 +1,4 @@
-## Barista
+## Barista [![Build Status](https://travis-ci.org/danascheider/barista.svg?branch=dev)](https://travis-ci.org/danascheider/barista)
 Fixtures for testing Backbone.js apps. Currently in beginning stages of development.
 The `example` directory contains a small Backbone.js app that is being used to test the
 framework.
