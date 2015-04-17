@@ -1,0 +1,1 @@
+require(process.cwd() + '/spec/support/fixtures.js');
