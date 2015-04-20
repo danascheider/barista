@@ -20,6 +20,7 @@ describe('Barista.Model', function() {
       model.on('destroy', spy);
       model.on('sync', spy2);
       spyOn(Backbone, 'sync');
+      spyOn(model, 'stopListening');
     });
 
     afterEach(function() { 
@@ -30,6 +31,11 @@ describe('Barista.Model', function() {
     it('doesn\'t call Backbone.sync', function() {
       model.destroy();
       expect(Backbone.sync).not.toHaveBeenCalled();
+    });
+
+    it('calls stopListening', function() {
+      model.destroy();
+      expect(model.stopListening).toHaveBeenCalled();
     });
 
     it('triggers the \'sync\' event', function() {
