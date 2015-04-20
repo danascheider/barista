@@ -22,6 +22,14 @@ describe('Barista.Collection', function() {
       model2 = new Barista.TaskModel();
       collection = new Barista.TaskCollection([model1, model2]);
       spyOn(Barista.TaskModel.prototype, 'save');
+      spyOn(Backbone, 'sync');
+      spy = jasmine.createSpy();
+      collection.on('sync', spy);
+    });
+
+    it('doesn\'t call Backbone.sync', function() {
+      collection.create(new Barista.TaskModel({title: 'Task 3'}));
+      expect(Backbone.sync).not.toHaveBeenCalled();
     });
 
     it('calls save on the new model', function() {
@@ -30,13 +38,18 @@ describe('Barista.Collection', function() {
     });
 
     it('adds the new model to the collection', function() {
-      collection.create(new Barista.TaskModel({title: 'Task 3'}));
+      collection.create({title: 'Task 3'});
       expect(collection.where({title: 'Task 3'}).length).toBe(1);
     });
 
     it('returns the model', function() {
       var model3 = new Barista.TaskModel({title: 'Task 3'});
       expect(collection.create(model3)).toBe(model3);
+    });
+
+    it('triggers the sync event', function() {
+      collection.create({title: 'Task 3'});
+      expect(spy).toHaveBeenCalled();
     });
   });
 
