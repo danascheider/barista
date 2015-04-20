@@ -1,5 +1,6 @@
-var Barista    = require(process.cwd() + '/lib/barista.js');
-var ExampleApp = require(process.cwd() + '/spec/ex1/exampleApp1.js');
+var Barista    = require(process.cwd() + '/lib/barista.js'),
+    ExampleApp = require(process.cwd() + '/spec/ex1/exampleApp1.js'),
+    context    = describe;
 
 describe('Barista', function() {
   it('has a Model property', function() {
@@ -59,6 +60,23 @@ describe('Barista', function() {
     it('creates a Barista.TaskModel object', function() {
       Barista.config(ExampleApp);
       expect(typeof Barista.TaskModel).not.toBe('undefined');
+    });
+
+    it('creates a Barista.TaskCollection object', function() {
+      Barista.config(ExampleApp);
+      expect(typeof Barista.TaskCollection).not.toBe('undefined');
+    });
+
+    it('extends the Barista.Model object', function() {
+      spyOn(Barista.Model, 'extend');
+      Barista.config(ExampleApp);
+      expect(Barista.Model.extend).toHaveBeenCalledWith(ExampleApp.TaskModel);
+    });
+
+    it('extends the Barista.Collection object', function() {
+      spyOn(Barista.Collection, 'extend');
+      Barista.config(ExampleApp);
+      expect(Barista.Collection.extend).toHaveBeenCalledWith(ExampleApp.TaskCollection);
     });
   });
 });
