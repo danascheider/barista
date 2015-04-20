@@ -4,6 +4,8 @@ var Barista    = require(process.cwd() + '/lib/barista.js'),
     context    = describe;
 
 describe('Barista', function() {
+  var model1, model2, collection, spy;
+
   it('has a Model property', function() {
     expect(typeof Barista.Model).not.toBe('undefined');
   });
@@ -48,6 +50,46 @@ describe('Barista', function() {
       spyOn(Barista.Collection, 'extend');
       Barista.config(ExampleApp);
       expect(Barista.Collection.extend).toHaveBeenCalledWith(ExampleApp.TaskCollection);
+    });
+  });
+
+  describe('Barista.destroy()', function() {
+    beforeEach(function() {
+      Barista.config(ExampleApp);
+      model1 = new Barista.TaskModel();
+      model2 = new Barista.TaskModel();
+      collection = new Barista.TaskCollection([model1, model2]);
+      spyOn(model1, 'destroy');
+      spyOn(model2, 'destroy');
+      spyOn(collection, 'destroy');
+    });
+
+    it('calls destroy on all model instances', function() {
+      Barista.destroy();
+      expect(model1.destroy).toHaveBeenCalled();
+      expect(model2.destroy).toHaveBeenCalled();
+    });
+
+    it('removes the model instances from the _modelInstances array', function() {
+      Barista.destroy();
+      expect(Barista._modelInstances.length).toBe(0);
+    });
+  });
+
+  describe('instantiating models and collections', function() {
+
+    beforeEach(function() {
+      Barista.config(ExampleApp);
+    });
+
+    it('adds the model to the _modelInstances array', function() {
+      var model = new Barista.TaskModel();
+      expect(Barista._modelInstances).toContain(model);
+    });
+
+    it('adds the collection to the _collectionInstances array', function() {
+      var collection = new Barista.TaskCollection();
+      expect(Barista._collectionInstances).toContain(collection);
     });
   });
 });

@@ -53,6 +53,19 @@ describe('Barista.Collection', function() {
     });
   });
 
+  describe('destroy', function() {
+    it('removes the models', function() {
+      collection.destroy();
+      expect(collection.length).toBe(0);
+    });
+
+    it('calls stopListening', function() {
+      spyOn(collection, 'stopListening');
+      collection.destroy();
+      expect(collection.stopListening).toHaveBeenCalled();
+    });
+  });
+
   describe('fetch', function() {
     beforeEach(function() {
       model1 = new Barista.TaskModel();
