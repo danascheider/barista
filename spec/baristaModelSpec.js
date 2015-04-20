@@ -48,4 +48,12 @@ describe('Barista.Model', function() {
       expect(model.get('title')).toBe('Foobar');
     });
   });
+
+  describe('set', function() {
+    it('sets attributes on the model', function() {
+      model = new Barista.TaskModel();
+      model.set('priority', 'urgent');
+      expect(model.get('priority')).toBe('urgent');
+    });
+  });
 });
