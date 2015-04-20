@@ -1,4 +1,5 @@
 var Barista    = require(process.cwd() + '/lib/barista.js'),
+    _          = require('underscore'),
     ExampleApp = require(process.cwd() + '/spec/ex1/exampleApp1.js'),
     context    = describe;
 
@@ -11,6 +12,13 @@ describe('Barista', function() {
     expect(typeof Barista.Collection).not.toBe('undefined');  
   });
 
+  it('has a \'_modelInstances\' array', function() {
+    expect(_.isArray(Barista._modelInstances)).toBe(true);
+  });
+
+  it('has a \'_collectionInstances\' array', function() {
+    expect(_.isArray(Barista._collectionInstances)).toBe(true);
+  });
 
   describe('Barista.config()', function() {
 
