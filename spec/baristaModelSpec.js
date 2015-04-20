@@ -11,18 +11,30 @@ describe('Barista.Model', function() {
   });
 
   describe('destroy', function() {
+    var spy2;
+
     beforeEach(function() {
       model = new Barista.TaskModel();
       spy   = jasmine.createSpy();
+      spy2  = jasmine.createSpy();
       model.on('destroy', spy);
+      model.on('sync', spy2);
       spyOn(Backbone, 'sync');
     });
 
-    afterEach(function() { model.off('destroy'); });
+    afterEach(function() { 
+      model.off('destroy'); 
+      model.off('sync');
+    });
 
     it('doesn\'t call Backbone.sync', function() {
       model.destroy();
       expect(Backbone.sync).not.toHaveBeenCalled();
+    });
+
+    it('triggers the \'sync\' event', function() {
+      model.destroy();
+      expect(spy2).toHaveBeenCalled();
     });
   });
 
