@@ -69,6 +69,24 @@ describe('Barista.Model', function() {
     });
   });
 
+  describe('save', function() {
+    beforeEach(function() {
+      model = new Barista.TaskModel();
+      spy   = jasmine.createSpy();
+      model.on('sync', spy);
+    });
+
+    afterEach(function() { model.off('sync'); });
+
+    it('sets the model\'s attributes', function() {
+      model.save({priority: 'High', complete: false});
+      expect(model.attributes).toEqual(jasmine.objectContaining({
+        priority: 'High',
+        complete: false
+      }));
+    });
+  });
+
   describe('set', function() {
     it('sets attributes on the model', function() {
       model = new Barista.TaskModel();
