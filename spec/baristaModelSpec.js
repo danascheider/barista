@@ -19,4 +19,22 @@ describe('Barista.Model', function() {
       expect(newModel.isA('Barista.Collection')).toBe(false);
     });
   });
+
+  describe('prototype', function() {
+    describe('initialize', function() {
+      it('exists', function() {
+        expect(typeof Barista.Model.prototype.initialize).toBe('function');
+      });
+    });
+
+    describe('changed', function() {
+      it('is defined', function() {
+        expect(typeof Barista.Model.prototype.changed).toBe('object');
+      });
+
+      it('is null', function() {
+        expect(Barista.Model.prototype.changed).toBe(null);
+      });
+    });
+  });
 });
