@@ -4,7 +4,11 @@ var Barista    = require(process.cwd() + '/lib/barista.js'),
     context    = describe;
 
 describe('Barista.Collection', function() {
-  var collection, spy;
+  var collection, model1, model2, spy;
+
+  beforeEach(function() {
+    Barista.config(ExampleApp);
+  });
 
   describe('properties', function() {
     it('has model Barista.Model by default', function() {
@@ -26,6 +30,19 @@ describe('Barista.Collection', function() {
     it('returns false with another argument', function() {
       var newCollection = new Barista.Collection();
       expect(newCollection.isA('Porsche')).toBe(false);
+    });
+  });
+
+  describe('remove', function() {
+    beforeEach(function() {
+      model1 = new Barista.TaskModel({title: 'Task 1'});
+      model2 = new Barista.TaskModel({title: 'Task 2'});
+      collection = new Barista.TaskCollection([model1, model2]);
+    });
+
+    it('removes the model from the collection', function() {
+      collection.remove([model1]);
+      expect(collection.models).not.toContain(model1);
     });
   });
 
