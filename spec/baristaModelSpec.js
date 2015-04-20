@@ -44,6 +44,10 @@ describe('Barista.Model', function() {
       expect(model.changed).toEqual({});
     });
 
+    it('returns the model', function() {
+      expect(model.sync()).toBe(model);
+    });
+
     context('without silent option', function() {
       it('triggers the \'change\' event', function() {
         var spy = jasmine.createSpy();
