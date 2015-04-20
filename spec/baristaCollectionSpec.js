@@ -35,14 +35,30 @@ describe('Barista.Collection', function() {
 
   describe('remove', function() {
     beforeEach(function() {
+      spy = jasmine.createSpy();
       model1 = new Barista.TaskModel({title: 'Task 1'});
       model2 = new Barista.TaskModel({title: 'Task 2'});
       collection = new Barista.TaskCollection([model1, model2]);
+      collection.on('remove', spy);
     });
 
     it('removes the model from the collection', function() {
       collection.remove([model1]);
       expect(collection.models).not.toContain(model1);
+    });
+
+    context('without the silent option', function() {
+      it('triggers the \'remove\' event', function() {
+        collection.remove([model1]);
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+
+    context('with the silent option', function() {
+      it('doesn\'t trigger the \'remove\' event', function() {
+        collection.remove([model1], {silent: true});
+        expect(spy).not.toHaveBeenCalled();
+      });
     });
   });
 
