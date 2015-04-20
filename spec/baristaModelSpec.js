@@ -42,6 +42,22 @@ describe('Barista.Model', function() {
       model.destroy();
       expect(spy2).toHaveBeenCalled();
     });
+
+    context('when the model is new', function() {
+      beforeEach(function() { spyOn(model, 'isNew').and.returnValue(true); });
+
+      it('returns false', function() {
+        expect(model.destroy()).toBe(false);
+      });
+    });
+
+    context('when the model is not new', function() {
+      beforeEach(function() { spyOn(model, 'isNew').and.returnValue(false); });
+
+      it('returns the model', function() {
+        expect(model.destroy()).toBe(model);
+      });
+    });
   });
 
   describe('fetch', function() {
