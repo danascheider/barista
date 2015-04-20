@@ -11,25 +11,6 @@ describe('Barista', function() {
     expect(typeof Barista.Collection).not.toBe('undefined');  
   });
 
-  describe('Barista.Model', function() {
-    describe('isA', function() {
-      it('returns true with arg \'Backbone.Model\'', function() {
-        var newModel = new Barista.Model();
-        expect(newModel.isA('Backbone.Model')).toBe(true);
-      });
-
-      it('returns true with arg\'Barista.Model\'', function() {
-        var newModel = new Barista.Model();
-        expect(newModel.isA('Barista.Model')).toBe(true);
-      });
-
-      it('returns false with another argument', function() {
-        var newModel = new Barista.Model();
-        expect(newModel.isA('Barista.Collection')).toBe(false);
-      });
-    });
-  });
-
   describe('Barista.Collection', function() {
     describe('isA', function() {
       it('returns true with arg \'Backbone.Collection\'', function() {
