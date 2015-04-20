@@ -3,6 +3,12 @@ var Barista    = require(process.cwd() + '/lib/barista.js'),
     context    = describe;
 
 describe('Barista.Collection', function() {
+  describe('properties', function() {
+    it('has model Barista.Model by default', function() {
+      expect(Barista.Collection.prototype.model).toBe(Barista.Model);
+    });
+  });
+
   describe('isA', function() {
     it('returns true with arg \'Backbone.Collection\'', function() {
       var newCollection = new Barista.Collection();
