@@ -37,6 +37,12 @@ describe('Barista.Model', function() {
       model.sync();
       expect(Backbone.sync).not.toHaveBeenCalled();
     });
+
+    it('sets _changing to false', function() {
+      model.set('priority', 'High');
+      model.sync();
+      expect(model.changed).toEqual({});
+    });
   });
 
   describe('get', function() {
