@@ -74,9 +74,15 @@ describe('Barista.Model', function() {
       model = new Barista.TaskModel();
       spy   = jasmine.createSpy();
       model.on('sync', spy);
+      spyOn(Backbone, 'sync');
     });
 
     afterEach(function() { model.off('sync'); });
+
+    it('doesn\'t call Backbone.sync', function() {
+      model.save({priority: 'High', complete: false});
+      expect(Backbone.sync).not.toHaveBeenCalled();
+    });
 
     it('sets the model\'s attributes', function() {
       model.save({priority: 'High', complete: false});
