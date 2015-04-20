@@ -4,10 +4,52 @@ var Barista    = require(process.cwd() + '/lib/barista.js'),
     context    = describe;
 
 describe('Barista.Model', function() {
-  var model;
+  var model, spy;
 
   beforeEach(function() {
     Barista.config(ExampleApp);
+  });
+
+  describe('fetch', function() {
+    beforeEach(function() {
+      model = new Barista.TaskModel();
+      spy   = jasmine.createSpy();
+      model.on('sync', spy);
+    });
+
+    afterEach(function() {
+      model.off('sync');
+    });
+
+    it('doesn\'t call Backbone.sync', function() {
+      spyOn(Backbone, 'sync');
+      model.fetch();
+      expect(Backbone.sync).not.toHaveBeenCalled();
+    });
+
+    context('silent false', function() {
+      it('triggers the \'sync\' event', function() {
+        model.fetch();
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+
+    context('silent true', function() {
+      it('doesn\'t trigger the \'sync\' event', function() {
+        model.fetch({silent: true});
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('get', function() {
+    beforeEach(function() {
+      model = new Barista.TaskModel({title: 'Foobar'});
+    });
+
+    it('retrieves the object\'s attribute', function() {
+      expect(model.get('title')).toBe('Foobar');
+    });
   });
 
   describe('isA', function() {
@@ -24,6 +66,14 @@ describe('Barista.Model', function() {
     it('returns false with another argument', function() {
       var newModel = new Barista.Model();
       expect(newModel.isA('Barista.Collection')).toBe(false);
+    });
+  });
+
+  describe('set', function() {
+    it('sets attributes on the model', function() {
+      model = new Barista.TaskModel();
+      model.set('priority', 'urgent');
+      expect(model.get('priority')).toBe('urgent');
     });
   });
 
@@ -66,24 +116,6 @@ describe('Barista.Model', function() {
         expect(spy).not.toHaveBeenCalled();
         model.off('change');
       });
-    });
-  });
-
-  describe('get', function() {
-    beforeEach(function() {
-      model = new Barista.TaskModel({title: 'Foobar'});
-    });
-
-    it('retrieves the object\'s attribute', function() {
-      expect(model.get('title')).toBe('Foobar');
-    });
-  });
-
-  describe('set', function() {
-    it('sets attributes on the model', function() {
-      model = new Barista.TaskModel();
-      model.set('priority', 'urgent');
-      expect(model.get('priority')).toBe('urgent');
     });
   });
 });
