@@ -57,6 +57,16 @@ describe('Barista.Model', function() {
         model.off('change');
       });
     });
+
+    context('with the silent option', function() {
+      it('doesn\'t trigger the \'change\' event', function() {
+        var spy = jasmine.createSpy();
+        model.on('change', spy);
+        model.sync({silent: true});
+        expect(spy).not.toHaveBeenCalled();
+        model.off('change');
+      });
+    });
   });
 
   describe('get', function() {
