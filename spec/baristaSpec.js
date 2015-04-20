@@ -74,6 +74,11 @@ describe('Barista', function() {
       Barista.destroy();
       expect(Barista._modelInstances.length).toBe(0);
     });
+
+    it('calls destroy on all collection instances', function() {
+      Barista.destroy();
+      expect(collection.destroy).toHaveBeenCalled();
+    });
   });
 
   describe('instantiating models and collections', function() {
