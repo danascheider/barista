@@ -11,9 +11,9 @@ Install Barista using NPM:
 #### Configuring Barista
 Configuring Barista is easy but relies on a couple of conventions:
   1. Your app must be represented as an object. In Node or iojs:
-         var App = require('./app.min.js')
+         `var App = require('./app.min.js')`
   2. All models and collections must be namespaced to the app:
-         App.TodoItemModel = Backbone.Model.extend({ ... });
+         `App.TodoItemModel = Backbone.Model.extend({ ... });`
   3. All models must include the word "Model" or "model" in their name
   4. All collections must include the words "Collection" or "collection"
      in their name
