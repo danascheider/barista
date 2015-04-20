@@ -38,10 +38,20 @@ describe('Barista.Model', function() {
       expect(Backbone.sync).not.toHaveBeenCalled();
     });
 
-    it('sets _changing to false', function() {
+    it('empties the model.changed object', function() {
       model.set('priority', 'High');
       model.sync();
       expect(model.changed).toEqual({});
+    });
+
+    context('without silent option', function() {
+      it('triggers the \'change\' event', function() {
+        var spy = jasmine.createSpy();
+        model.on('change', spy);
+        model.sync();
+        expect(spy).toHaveBeenCalled();
+        model.off('change');
+      });
     });
   });
 
