@@ -11,24 +11,6 @@ describe('Barista', function() {
     expect(typeof Barista.Collection).not.toBe('undefined');  
   });
 
-  describe('Barista.Collection', function() {
-    describe('isA', function() {
-      it('returns true with arg \'Backbone.Collection\'', function() {
-        var newCollection = new Barista.Collection();
-        expect(newCollection.isA('Backbone.Collection')).toBe(true);
-      });
-
-      it('returns true with arg \'Barista.Collection\'', function() {
-        var newCollection = new Barista.Collection();
-        expect(newCollection.isA('Barista.Collection')).toBe(true);
-      });
-
-      it('returns false with another argument', function() {
-        var newCollection = new Barista.Collection();
-        expect(newCollection.isA('Porsche')).toBe(false);
-      });
-    });
-  });
 
   describe('Barista.config()', function() {
 
