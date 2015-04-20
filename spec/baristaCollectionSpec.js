@@ -16,6 +16,24 @@ describe('Barista.Collection', function() {
     });
   });
 
+  describe('fetch', function() {
+    beforeEach(function() {
+      model1 = new Barista.TaskModel();
+      model2 = new Barista.TaskModel();
+      collection = new Barista.TaskCollection([model1, model2]);
+      spy = jasmine.createSpy();
+      collection.on('sync', spy);
+      spyOn(Backbone, 'sync');
+    });
+
+    afterEach(function() { collection.off('sync'); });
+
+    it('doesn\'t call Backbone.sync', function() {
+      collection.fetch();
+      expect(Backbone.sync).not.toHaveBeenCalled();
+    });
+  });
+
   describe('isA', function() {
     it('returns true with arg \'Backbone.Collection\'', function() {
       var newCollection = new Barista.Collection();
