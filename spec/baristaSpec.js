@@ -1,5 +1,6 @@
-var Barista    = require(process.cwd() + '/lib/barista.js'),
-    _          = require('underscore'),
+require(process.cwd() + '/lib/barista.js');
+
+var _          = require('underscore'),
     ExampleApp = require(process.cwd() + '/spec/ex1/exampleApp1.js'),
     context    = describe;
 
@@ -78,6 +79,11 @@ describe('Barista', function() {
     it('calls destroy on all collection instances', function() {
       Barista.destroy();
       expect(collection.destroy).toHaveBeenCalled();
+    });
+
+    it('removes the collection instances from the _collectionInstances array', function() {
+      Barista.destroy();
+      expect(Barista._collectionInstances.length).toBe(0);
     });
   });
 
