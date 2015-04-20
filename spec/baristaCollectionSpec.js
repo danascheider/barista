@@ -32,6 +32,13 @@ describe('Barista.Collection', function() {
       collection.fetch();
       expect(Backbone.sync).not.toHaveBeenCalled();
     });
+
+    context('without the silent option', function() {
+      it('triggers a \'remove\' event', function() {
+        collection.fetch();
+        expect(spy).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('isA', function() {
