@@ -10,6 +10,22 @@ describe('Barista.Model', function() {
     Barista.config(ExampleApp);
   });
 
+  describe('destroy', function() {
+    beforeEach(function() {
+      model = new Barista.TaskModel();
+      spy   = jasmine.createSpy();
+      model.on('destroy', spy);
+      spyOn(Backbone, 'sync');
+    });
+
+    afterEach(function() { model.off('destroy'); });
+
+    it('doesn\'t call Backbone.sync', function() {
+      model.destroy();
+      expect(Backbone.sync).not.toHaveBeenCalled();
+    });
+  });
+
   describe('fetch', function() {
     beforeEach(function() {
       model = new Barista.TaskModel();
