@@ -16,6 +16,30 @@ describe('Barista.Collection', function() {
     });
   });
 
+  describe('create', function() {
+    beforeEach(function() {
+      model1 = new Barista.TaskModel();
+      model2 = new Barista.TaskModel();
+      collection = new Barista.TaskCollection([model1, model2]);
+      spyOn(Barista.TaskModel.prototype, 'save');
+    });
+
+    it('calls save on the new model', function() {
+      collection.create(new Barista.TaskModel({title: 'Task 3'}));
+      expect(Barista.TaskModel.prototype.save).toHaveBeenCalled();
+    });
+
+    it('adds the new model to the collection', function() {
+      collection.create(new Barista.TaskModel({title: 'Task 3'}));
+      expect(collection.where({title: 'Task 3'}).length).toBe(1);
+    });
+
+    it('returns the model', function() {
+      var model3 = new Barista.TaskModel({title: 'Task 3'});
+      expect(collection.create(model3)).toBe(model3);
+    });
+  });
+
   describe('fetch', function() {
     beforeEach(function() {
       model1 = new Barista.TaskModel();
