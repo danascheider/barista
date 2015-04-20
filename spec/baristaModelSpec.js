@@ -40,6 +40,12 @@ describe('Barista.Model', function() {
   });
 
   describe('get', function() {
-    
+    beforeEach(function() {
+      model = new Barista.TaskModel({title: 'Foobar'});
+    });
+
+    it('retrieves the object\'s attribute', function() {
+      expect(model.get('title')).toBe('Foobar');
+    });
   });
 });
