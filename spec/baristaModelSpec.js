@@ -91,6 +91,15 @@ describe('Barista.Model', function() {
         complete: false
       }));
     });
+
+    it('returns the model', function() {
+      expect(model.save({priority: 'High', complete: false})).toBe(model);
+    });
+
+    it('triggers the \'sync\' event', function() {
+      model.save('priority', 'High');
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
   describe('set', function() {
