@@ -1,5 +1,5 @@
 {
-  "name"            : "Barista",
+  "name"            : "barista",
   "version"         : "0.1.0",
   "repository"      : "https://github.com/danascheider/barista",
   "description"     : "JavaScript test fixtures for use with Backbone.js",
