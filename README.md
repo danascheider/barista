@@ -1,4 +1,4 @@
-## Barista [![Build Status](https://travis-ci.org/danascheider/barista.svg?branch=dev)](https://travis-ci.org/danascheider/barista)
+## BaristaJS [![Build Status](https://travis-ci.org/danascheider/barista.svg?branch=dev)](https://travis-ci.org/danascheider/barista)
 Fixtures for testing Backbone.js apps. Currently in beginning stages of development.
 The `example` directory contains a small Backbone.js app that is being used to test the
 framework.
@@ -6,7 +6,7 @@ framework.
 ### Usage
 #### Installing Barista
 Install Barista using NPM:
-    npm install barista
+    npm install baristajs
 
 #### Configuring Barista
 Configuring Barista is easy but relies on a couple of conventions:
@@ -20,7 +20,7 @@ Configuring Barista is easy but relies on a couple of conventions:
 
 If your app follows these conventions, then just put this in your spec helper file or wherever
 you keep your test configuration:
-    var Barista = require('barista'),
+    var Barista = require('baristajs'),
         App     = require('../app.js');
 
     Barista.config(app);

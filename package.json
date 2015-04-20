@@ -1,6 +1,6 @@
 {
-  "name"            : "barista",
-  "version"         : "0.1.0",
+  "name"            : "baristajs",
+  "version"         : "0.1.1",
   "repository"      : "https://github.com/danascheider/barista",
   "description"     : "JavaScript test fixtures for use with Backbone.js",
   "scripts"         : {
